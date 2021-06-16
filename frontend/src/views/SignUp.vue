@@ -109,10 +109,14 @@ export default class SignUp extends Vue {
     }
   }
   checkPassword(): void{
+    if (this.confirm_password === ""){
+      this.showErrorMsg = false;
+      this.enableSubmitBtn = false;
+    }
     if (this.user.Password === this.confirm_password) {
       this.showErrorMsg = false;
       this.enableSubmitBtn = true;
-    } else {
+    } else if(this.user.Password !== this.confirm_password) {
       this.showErrorMsg = true;
       this.enableSubmitBtn = false;
     }
