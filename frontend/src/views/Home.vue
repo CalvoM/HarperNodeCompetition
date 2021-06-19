@@ -16,7 +16,7 @@ import {MglMap} from "vue-mapbox"
   },
 })
 export default class Home extends Vue {
-  accessToken  = "pk.eyJ1IjoiZDFyM2N0MHIiLCJhIjoiY2twdHZnZzhpMHR2aDJvdDhiZmJuemxnaSJ9.12nIcmk0giCqU8XgK13W4Q"
+  accessToken  = process.env.VUE_APP_MAP_ACCESS_TOKEN
   mapStyle = "mapbox://styles/mapbox/streets-v11"
   mapbox: typeof Mapbox
   created(): void{
