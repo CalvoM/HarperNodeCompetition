@@ -1,15 +1,12 @@
 import { createStore } from 'vuex'
 import createPersistedState from 'vuex-persistedstate';
-import auth from './modules/auth'
+import { store as auth } from './modules/auth';
+export type RootState = {
+  data:null
+}
 export default createStore({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
   modules: {
-    auth,
+    auth
   },
-  plugins:[createPersistedState()]
+  plugins:[createPersistedState({storage: window.sessionStorage})]
 })
