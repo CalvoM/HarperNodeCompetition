@@ -34,6 +34,12 @@
         Log in
       </button>
     </form>
+    <div class="text-sm text-green-500 py-3">
+      No account?
+    </div>
+    <a id="info" class="font-bold text-green-700" href="/signup/" target="_blank">
+      Create a new account.
+    </a>
   </div>
 </template>
 

@@ -66,6 +66,12 @@
         Sign up
       </button>
     </form>
+    <div class="text-sm text-green-500 py-3">
+      Already have an account?
+    </div>
+    <a id="info" class="font-bold text-green-700" href="/signin/" target="_blank">
+      Sign in.
+    </a>
   </div>
 </template>
 
@@ -104,9 +110,10 @@ export default class SignUp extends Vue {
     }
   }
   checkPassword(): void{
-    if (this.confirm_password === ""){
+    if (this.confirm_password.length ===0){
       this.showErrorMsg = false;
-      this.enableSubmitBtn = false;
+      this.enableSubmitBtn = true;
+      return
     }
     if (this.user.Password === this.confirm_password) {
       this.showErrorMsg = false;
