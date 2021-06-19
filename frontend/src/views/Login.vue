@@ -39,17 +39,10 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import axios from "axios";
+import {BaseUser as User, HTTPError} from "@/types";
 import Notification from "@/components/Notification.vue"
-interface User {
-  UserEmail: string;
-  Password: string;
-}
-interface HTTPError{
-  ShowErr: boolean;
-  Message: string;
-  Variant: string
-}
+import store from "@/store"
+import {ActionTypes} from "@/store/modules/auth/actions"
 @Options({
   components:{
     Notification
@@ -62,13 +55,9 @@ export default class SignUp extends Vue {
   enableSubmitBtn = false
   async submitForm(): Promise<void> {
     try {
-      let resp = await axios.post(
-        process.env.VUE_APP_SERVER_URL + "/user/signin/",
-        this.user
-      );
+      store.dispatch(ActionTypes.LOGIN, this.user)
       this.user = { UserEmail: "", Password: "" };
       this.httpError = {Message:"Log in Successful",ShowErr:true,Variant:"success"}
-      console.log(resp)
     } catch (error) {
       this.httpError = {Message:"Something went wrong",ShowErr:true, Variant:"error"}
     }

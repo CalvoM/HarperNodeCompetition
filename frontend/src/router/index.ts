@@ -5,12 +5,8 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Home',
-    component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue')
-  },
-  {
-    path: '/about',
-    name: 'About',
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue'),
+    meta: {needsAuth: true}
   },
   {
     path: '/signup/',
@@ -32,9 +28,27 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if(to.matched.some(record => record.meta.guest)){
-    next()
+  if (to.matched.some((record) => record.meta.needsAuth)) {
+    if (store.getters.isAuthenticated) {
+      next();
+      return;
+    }
+    next("/signin/");
+  } else {
+    next();
   }
-})
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.guest)) {
+    if (store.getters.isAuthenticated) {
+      next("/");
+      return;
+    }
+    next();
+  } else {
+    next();
+  }
+});
 
 export default router

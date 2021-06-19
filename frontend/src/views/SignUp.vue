@@ -72,16 +72,11 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import axios from "axios";
+import {BaseUser, HTTPError} from "@/types"
 import Notification from "@/components/Notification.vue"
-interface User {
+
+interface User extends BaseUser{
   UserName: string;
-  UserEmail: string;
-  Password: string;
-}
-interface HTTPError{
-  ShowErr: boolean;
-  Message: string;
-  Variant: string
 }
 @Options({
   components:{
