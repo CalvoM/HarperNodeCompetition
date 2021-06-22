@@ -1,5 +1,5 @@
 <template>
-  <div id="map" class="w-full">
+  <div id="map" class="w-full absolute top-0 bottom-0">
     <!-- <MglMap :accessToken="accessToken" :mapStyle="mapStyle"></MglMap> -->
   </div>
 </template>
@@ -27,11 +27,11 @@ export default class Home extends Vue {
 new Mapbox.Map({
       container: "map",
       style: "mapbox://styles/mapbox/streets-v11",
-      center: [103.811279, 1.345399],
+      center: [36.815500, -1.284100],
       zoom: 12,
       maxBounds: [
-        [103.6, 1.1704753],
-        [104.1, 1.4754753],
+        [36.819500, -1.294100],
+        [36.814500, -1.264100],
       ],
     });
 
