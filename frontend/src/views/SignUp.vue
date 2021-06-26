@@ -77,9 +77,10 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import axios from "axios";
 import {BaseUser, HTTPError} from "@/types"
 import Notification from "@/components/Notification.vue"
+import store from "@/store";
+import { ActionTypes } from "@/store/modules/auth/actions";
 
 interface User extends BaseUser{
   UserName: string;
@@ -97,14 +98,10 @@ export default class SignUp extends Vue {
   enableSubmitBtn = false;
   async submitForm(): Promise<void> {
     try {
-      let resp = await axios.post(
-        process.env.VUE_APP_SERVER_URL + "/user/signup/",
-        this.user
-      );
+      store.dispatch(ActionTypes.REGISTER,this.user)
       this.user = { UserEmail: "", UserName: "", Password: "" };
       this.confirm_password = ""
       this.httpError = {Message:"Sign up Successful",ShowErr:true,Variant:"success"}
-      console.log(resp)
     } catch (error) {
       this.httpError = {Message:"Something went wrong",ShowErr:true, Variant:"error"}
     }
