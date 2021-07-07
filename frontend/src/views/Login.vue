@@ -54,18 +54,20 @@ import {ActionTypes} from "@/store/modules/auth/actions"
     Notification
   }
 })
-export default class SignUp extends Vue {
+export default class Login extends Vue {
   user: User = { UserEmail: "", Password: "" };
   httpError: HTTPError = {ShowErr:false,Message:"",Variant:""}
   showErrorMsg = false;
   enableSubmitBtn = false
   async submitForm(): Promise<void> {
     try {
-      store.dispatch(ActionTypes.LOGIN, this.user)
+      await store.dispatch(ActionTypes.LOGIN, this.user)
       this.user = { UserEmail: "", Password: "" };
       this.httpError = {Message:"Log in Successful",ShowErr:true,Variant:"success"}
+      this.$router.push({name:"Home"})
     } catch (error) {
       this.httpError = {Message:"Something went wrong",ShowErr:true, Variant:"error"}
+      return
     }
   }
 }

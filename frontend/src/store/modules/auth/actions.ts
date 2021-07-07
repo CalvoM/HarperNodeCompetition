@@ -35,12 +35,11 @@ export const actions: ActionTree<State, RootState> & Actions = {
       );
     },
     async [ActionTypes.LOGIN]({commit}: AugmentedActionContext, user: BaseUser): Promise<void>{
-      console.table(user)
       const resp = await axios.post(
         process.env.VUE_APP_SERVER_URL + "/user/signin/",
         user
       );
-     commit(MutationTypes.SET_USER,{UserEmail:user.UserEmail,UserName:resp.data.username})
+     await commit(MutationTypes.SET_USER,{UserEmail:user.UserEmail,UserName:resp.data.username})
     },
     async [ActionTypes.LOGOUT]({commit}: AugmentedActionContext): Promise<void>{
       await axios.post(

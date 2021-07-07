@@ -14,9 +14,10 @@ export default class NavBar extends Vue{
     get isUserLoggedIn() : boolean{
         return store.getters.isAuthenticated
     }
-    logOut(): void{
+    async logOut(){
         try {
-            store.dispatch(ActionTypes.LOGOUT)
+            await store.dispatch(ActionTypes.LOGOUT)
+            this.$router.push({name:"Login"})
         } catch (error) {
            console.log(error) 
            alert("Failed to log out")

@@ -1,23 +1,23 @@
 import store from '@/store'
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHistory, isNavigationFailure, NavigationFailure, NavigationFailureType, RouteRecordRaw } from 'vue-router'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Home',
-    component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue'),
+    component: () => import('../views/Home.vue'),
     meta: {needsAuth: true}
   },
   {
-    path: '/signup/',
+    path: '/signup',
     name: 'SignUp',
-    component: () => import(/* webpackChunkName: "signup" */ '../views/SignUp.vue'),
+    component: () => import('../views/SignUp.vue'),
     meta: {guest:true}
   },
   {
-    path: '/signin/',
+    path: '/signin',
     name: 'Login',
-    component: () => import(/* webpackChunkName: "signup" */ '../views/Login.vue'),
+    component: () => import('../views/Login.vue'),
     meta: {guest: true}
   }
 ]
@@ -33,7 +33,7 @@ router.beforeEach((to, from, next) => {
       next();
       return;
     }
-    next("/signin/");
+    next("/signin");
   } else {
     next();
   }
@@ -50,5 +50,6 @@ router.beforeEach((to, from, next) => {
     next();
   }
 });
+
 
 export default router

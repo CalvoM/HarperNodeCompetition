@@ -22,11 +22,7 @@ import Loader from "@/components/Loader.vue"
 export default class Home extends Vue {
   registeredDevices = [];
   dataDownloaded = false;
-  created(): void {
-    console.log("Created");
-  }
   mounted(): void {
-    console.log("Mounted");
     setTimeout(() => {
       this.dataDownloaded = true;
     }, 5000);
